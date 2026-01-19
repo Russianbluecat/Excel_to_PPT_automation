@@ -1,0 +1,39 @@
+# Excel 임시 파일
+~$*.xls*
+*.xlk
+
+# PowerPoint 임시 파일
+~$*.ppt*
+
+# VBA 컴파일 파일
+*.exd
+
+# Windows 임시 파일
+Thumbs.db
+Desktop.ini
+
+# macOS 파일
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# 백업 파일
+*.bak
+*.tmp
+*~
+
+# 개인 정보가 포함된 파일
+*_private.*
+*_confidential.*
+
+# 실제 업무 데이터 (예제 파일만 공유)
+/real_data/
+*실제*.xlsx
+*실제*.pptx
+
+# IDE 설정 파일
+.vscode/
+.idea/
+
+# 로그 파일
+*.log
