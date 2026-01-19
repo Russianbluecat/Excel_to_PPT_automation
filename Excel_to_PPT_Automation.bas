@@ -2,58 +2,65 @@ Attribute VB_Name = "Module1"
 Option Explicit
 
 '==============================
-' ì „ì²´ ìŠ¬ë¼ì´ë“œ ì—…ë°ì´íŠ¸ ë©”ì¸ í•¨ìˆ˜
-' ëª©ì : Excel ë°ì´í„°ë¥¼ PowerPoint ì—¬ëŸ¬ ìŠ¬ë¼ì´ë“œì— ìë™ ë³µì‚¬
+' ÀüÃ¼ ½½¶óÀÌµå ¾÷µ¥ÀÌÆ® ¸ŞÀÎ ÇÔ¼ö
+' ¸ñÀû: Excel µ¥ÀÌÅÍ¸¦ PowerPoint ¿©·¯ ½½¶óÀÌµå¿¡ ÀÚµ¿ º¹»ç
 '==============================
 Sub Update_All_Slides()
     On Error GoTo ErrorHandler
     
-    ' ========== ë³€ìˆ˜ ì„ ì–¸ ==========
-    Dim pptApp As Object        ' PowerPoint ì• í”Œë¦¬ì¼€ì´ì…˜ ê°ì²´
-    Dim pptPres As Object       ' PowerPoint í”„ë ˆì  í…Œì´ì…˜ ê°ì²´
-    Dim ws As Worksheet         ' Excel ì›Œí¬ì‹œíŠ¸ ê°ì²´
-    Dim pptPath As String       ' PowerPoint íŒŒì¼ ê²½ë¡œ
+    ' ========== º¯¼ö ¼±¾ğ ==========
+    Dim pptApp As Object        ' PowerPoint ¾ÖÇÃ¸®ÄÉÀÌ¼Ç °´Ã¼
+    Dim pptPres As Object       ' PowerPoint ÇÁ·¹Á¨Å×ÀÌ¼Ç °´Ã¼
+    Dim ws As Worksheet         ' Excel ¿öÅ©½ÃÆ® °´Ã¼
+    Dim pptPath As String       ' PowerPoint ÆÄÀÏ °æ·Î
     
-    ' ========== Excel ì‹œíŠ¸ ì„¤ì • ==========
+    ' ========== Excel ½ÃÆ® ¼³Á¤ ==========
     On Error Resume Next
     Set ws = ThisWorkbook.Worksheets("Copy_to_Slide")
     On Error GoTo ErrorHandler
     
     If ws Is Nothing Then
-        MsgBox "Copy_to_Slide ì‹œíŠ¸ë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤."
+        MsgBox "Copy_to_Slide ½ÃÆ®¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù."
         Exit Sub
     End If
     
-    ' ========== PPT íŒŒì¼ ê²½ë¡œ ì„¤ì • ==========
+    ' ========== PPT ÆÄÀÏ °æ·Î ¼³Á¤ ==========
+    
     pptPath = "C:\Users\YourName\Documents\sample.pptx"
     
     If Dir(pptPath) = "" Then
-        MsgBox "PPT íŒŒì¼ì„ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤: " & vbCrLf & pptPath
+        MsgBox "PPT ÆÄÀÏÀ» Ã£À» ¼ö ¾ø½À´Ï´Ù: " & vbCrLf & pptPath
         Exit Sub
     End If
     
-    ' ========== PowerPoint ì‹¤í–‰ ë° íŒŒì¼ ì—´ê¸° ==========
+    ' ========== PowerPoint ½ÇÇà ¹× ÆÄÀÏ ¿­±â ==========
+    
     Set pptApp = CreateObject("PowerPoint.Application")
     pptApp.Visible = True
     Set pptPres = pptApp.Presentations.Open(pptPath)
     
-    Debug.Print "========== ì „ì²´ ìŠ¬ë¼ì´ë“œ ì—…ë°ì´íŠ¸ ì‹œì‘ =========="
+    Debug.Print "========== ÀüÃ¼ ½½¶óÀÌµå ¾÷µ¥ÀÌÆ® ½ÃÀÛ =========="
     
-    ' ========== ê° ìŠ¬ë¼ì´ë“œ ì—…ë°ì´íŠ¸ (í•¨ìˆ˜ ë¶„ë¦¬) ==========
-    Call Update_Slide1(pptPres, ws)  ' Slide 1 ì²˜ë¦¬
-    Call Update_Slide2(pptPres, ws)  ' Slide 2 ì²˜ë¦¬
-    ' ì¶”ê°€ ìŠ¬ë¼ì´ë“œê°€ ìˆìœ¼ë©´ ì—¬ê¸°ì— ì¶”ê°€
+    
+    
+    ' ========== °¢ ½½¶óÀÌµå ¾÷µ¥ÀÌÆ® (ÇÔ¼ö ºĞ¸®) ==========
+    
+    
+    Call Update_Slide1(pptPres, ws)  ' Slide 1 Ã³¸®
+    Call Update_Slide2(pptPres, ws)  ' Slide 2 Ã³¸®
+    
+    ' Ãß°¡ ½½¶óÀÌµå°¡ ÀÖÀ¸¸é ¿©±â¿¡ Ãß°¡
     ' Call Update_Slide3(pptPres, ws)
     ' Call Update_Slide4(pptPres, ws)
     
-    Debug.Print "========== ì „ì²´ ìŠ¬ë¼ì´ë“œ ì—…ë°ì´íŠ¸ ì™„ë£Œ =========="
+    Debug.Print "========== ÀüÃ¼ ½½¶óÀÌµå ¾÷µ¥ÀÌÆ® ¿Ï·á =========="
     
-    ' ========== íŒŒì¼ ì €ì¥ ==========
+    ' ========== ÆÄÀÏ ÀúÀå ==========
     pptPres.Save
-    MsgBox "ëª¨ë“  ìŠ¬ë¼ì´ë“œ ì—…ë°ì´íŠ¸ ì™„ë£Œ!"
+    MsgBox "¸ğµç ½½¶óÀÌµå ¾÷µ¥ÀÌÆ® ¿Ï·á!"
     
 CleanUp:
-    ' ========== ë¦¬ì†ŒìŠ¤ ì •ë¦¬ ==========
+    ' ========== ¸®¼Ò½º Á¤¸® ==========
     On Error Resume Next
     Application.CutCopyMode = False
     If Not pptPres Is Nothing Then pptPres.Close
@@ -64,13 +71,13 @@ CleanUp:
     Exit Sub
     
 ErrorHandler:
-    MsgBox "ì˜¤ë¥˜ ë°œìƒ: " & Err.Description & vbCrLf & "ë²ˆí˜¸: " & Err.Number
+    MsgBox "¿À·ù ¹ß»ı: " & Err.Description & vbCrLf & "¹øÈ£: " & Err.Number
     Resume CleanUp
 End Sub
 
 '==============================
-' Slide 1 ì—…ë°ì´íŠ¸
-' ë§¤í•‘: Text_01(A5), Pie_01(A9:B12), Bar_01(A16:C20), Text_02(A24:G25)
+' Slide 1 ¾÷µ¥ÀÌÆ®
+' ¸ÅÇÎ: Text_01(A5), Pie_01(A9:B12), Bar_01(A16:C20), Text_02(A24:G25)
 '==============================
 Sub Update_Slide1(pptPres As Object, ws As Worksheet)
     On Error Resume Next
@@ -80,19 +87,19 @@ Sub Update_Slide1(pptPres As Object, ws As Worksheet)
     Dim r As Long, c As Long
     Dim srcRange As Range
     
-    Set pptSlide = pptPres.Slides(1)  ' ì²« ë²ˆì§¸ ìŠ¬ë¼ì´ë“œ ì„ íƒ
-    Debug.Print "--- Slide 1 ì—…ë°ì´íŠ¸ ì‹œì‘ ---"
+    Set pptSlide = pptPres.Slides(1)  ' Ã¹ ¹øÂ° ½½¶óÀÌµå ¼±ÅÃ
+    Debug.Print "--- Slide 1 ¾÷µ¥ÀÌÆ® ½ÃÀÛ ---"
     
-    ' --- Slide_1_Text_01: A5 ë³µì‚¬ ---
+    ' --- Slide_1_Text_01: A5 º¹»ç ---
     Set shp = pptSlide.Shapes("Slide_1_Text_01")
     If Not shp Is Nothing Then
         ws.Range("A5").Copy
         shp.TextFrame.TextRange.Paste
-        Debug.Print "Slide_1_Text_01 ì™„ë£Œ"
+        Debug.Print "Slide_1_Text_01 ¿Ï·á"
     End If
     Application.CutCopyMode = False
     
-    ' --- Slide_1_Pie_01: A9:B12 ë³µì‚¬ ---
+    ' --- Slide_1_Pie_01: A9:B12 º¹»ç ---
     Set shp = pptSlide.Shapes("Slide_1_Pie_01")
     If Not shp Is Nothing Then
         With shp.Chart.ChartData
@@ -105,11 +112,11 @@ Sub Update_Slide1(pptPres As Object, ws As Worksheet)
             .Workbook.Close
         End With
         shp.Chart.Refresh
-        Debug.Print "Slide_1_Pie_01 ì™„ë£Œ"
+        Debug.Print "Slide_1_Pie_01 ¿Ï·á"
     End If
     Application.CutCopyMode = False
     
-    ' --- Slide_1_Bar_01: A16:C20 ë³µì‚¬ ---
+    ' --- Slide_1_Bar_01: A16:C20 º¹»ç ---
     Set shp = pptSlide.Shapes("Slide_1_Bar_01")
     If Not shp Is Nothing Then
         With shp.Chart.ChartData
@@ -122,11 +129,11 @@ Sub Update_Slide1(pptPres As Object, ws As Worksheet)
             .Workbook.Close
         End With
         shp.Chart.Refresh
-        Debug.Print "Slide_1_Bar_01 ì™„ë£Œ"
+        Debug.Print "Slide_1_Bar_01 ¿Ï·á"
     End If
     Application.CutCopyMode = False
     
-    ' --- Slide_1_Text_02: A24:G25 ë³µì‚¬ (2í–‰ 6ì—´ í‘œ) ---
+    ' --- Slide_1_Text_02: A24:G25 º¹»ç (2Çà 6¿­ Ç¥) ---
     Set shp = pptSlide.Shapes("Slide_1_Text_02")
     If Not shp Is Nothing And shp.HasTable Then
         Set srcRange = ws.Range("A24:G25")
@@ -137,15 +144,15 @@ Sub Update_Slide1(pptPres As Object, ws As Worksheet)
                 End If
             Next c
         Next r
-        Debug.Print "Slide_1_Text_02 ì™„ë£Œ"
+        Debug.Print "Slide_1_Text_02 ¿Ï·á"
     End If
     
-    Debug.Print "--- Slide 1 ì—…ë°ì´íŠ¸ ì™„ë£Œ ---"
+    Debug.Print "--- Slide 1 ¾÷µ¥ÀÌÆ® ¿Ï·á ---"
 End Sub
 
 '==============================
-' Slide 2 ì—…ë°ì´íŠ¸
-' ë§¤í•‘: Text_01(A33), Line_01(A37:D41), Bar_01(A44:C48)
+' Slide 2 ¾÷µ¥ÀÌÆ®
+' ¸ÅÇÎ: Text_01(A33), Line_01(A37:D41), Bar_01(A44:C48)
 '==============================
 Sub Update_Slide2(pptPres As Object, ws As Worksheet)
     On Error Resume Next
@@ -153,19 +160,19 @@ Sub Update_Slide2(pptPres As Object, ws As Worksheet)
     Dim pptSlide As Object
     Dim shp As Object
     
-    Set pptSlide = pptPres.Slides(2)  ' ë‘ ë²ˆì§¸ ìŠ¬ë¼ì´ë“œ ì„ íƒ
-    Debug.Print "--- Slide 2 ì—…ë°ì´íŠ¸ ì‹œì‘ ---"
+    Set pptSlide = pptPres.Slides(2)  ' µÎ ¹øÂ° ½½¶óÀÌµå ¼±ÅÃ
+    Debug.Print "--- Slide 2 ¾÷µ¥ÀÌÆ® ½ÃÀÛ ---"
     
-    ' --- Slide_2_Text_01: A33 ë³µì‚¬ ---
+    ' --- Slide_2_Text_01: A33 º¹»ç ---
     Set shp = pptSlide.Shapes("Slide_2_Text_01")
     If Not shp Is Nothing Then
         ws.Range("A33").Copy
         shp.TextFrame.TextRange.Paste
-        Debug.Print "Slide_2_Text_01 ì™„ë£Œ"
+        Debug.Print "Slide_2_Text_01 ¿Ï·á"
     End If
     Application.CutCopyMode = False
     
-    ' --- Slide_2_Line_01: A37:D41 ë³µì‚¬ (ì„  ì°¨íŠ¸) ---
+    ' --- Slide_2_Line_01: A37:D41 º¹»ç (¼± Â÷Æ®) ---
     Set shp = pptSlide.Shapes("Slide_2_Line_01")
     If Not shp Is Nothing Then
         With shp.Chart.ChartData
@@ -178,11 +185,11 @@ Sub Update_Slide2(pptPres As Object, ws As Worksheet)
             .Workbook.Close
         End With
         shp.Chart.Refresh
-        Debug.Print "Slide_2_Line_01 ì™„ë£Œ"
+        Debug.Print "Slide_2_Line_01 ¿Ï·á"
     End If
     Application.CutCopyMode = False
     
-    ' --- Slide_2_Bar_01: A44:C48 ë³µì‚¬ (ë§‰ëŒ€ ì°¨íŠ¸) ---
+    ' --- Slide_2_Bar_01: A44:C48 º¹»ç (¸·´ë Â÷Æ®) ---
     Set shp = pptSlide.Shapes("Slide_2_Bar_01")
     If Not shp Is Nothing Then
         With shp.Chart.ChartData
@@ -195,16 +202,16 @@ Sub Update_Slide2(pptPres As Object, ws As Worksheet)
             .Workbook.Close
         End With
         shp.Chart.Refresh
-        Debug.Print "Slide_2_Bar_01 ì™„ë£Œ"
+        Debug.Print "Slide_2_Bar_01 ¿Ï·á"
     End If
     Application.CutCopyMode = False
     
-    Debug.Print "--- Slide 2 ì—…ë°ì´íŠ¸ ì™„ë£Œ ---"
+    Debug.Print "--- Slide 2 ¾÷µ¥ÀÌÆ® ¿Ï·á ---"
 End Sub
 
 '==============================
-' Slide 3 ì—…ë°ì´íŠ¸ (í…œí”Œë¦¿)
-' ìƒˆ ìŠ¬ë¼ì´ë“œ ì¶”ê°€ ì‹œ ì´ í•¨ìˆ˜ë¥¼ ë³µì‚¬í•´ì„œ ìˆ˜ì •í•˜ì„¸ìš”
+' Slide 3 ¾÷µ¥ÀÌÆ® (ÅÛÇÃ¸´)
+' »õ ½½¶óÀÌµå Ãß°¡ ½Ã ÀÌ ÇÔ¼ö¸¦ º¹»çÇØ¼­ ¼öÁ¤ÇÏ¼¼¿ä
 '==============================
 Sub Update_Slide3(pptPres As Object, ws As Worksheet)
     On Error Resume Next
@@ -212,11 +219,11 @@ Sub Update_Slide3(pptPres As Object, ws As Worksheet)
     Dim pptSlide As Object
     Dim shp As Object
     
-    Set pptSlide = pptPres.Slides(3)  ' ì„¸ ë²ˆì§¸ ìŠ¬ë¼ì´ë“œ ì„ íƒ
-    Debug.Print "--- Slide 3 ì—…ë°ì´íŠ¸ ì‹œì‘ ---"
+    Set pptSlide = pptPres.Slides(3)  ' ¼¼ ¹øÂ° ½½¶óÀÌµå ¼±ÅÃ
+    Debug.Print "--- Slide 3 ¾÷µ¥ÀÌÆ® ½ÃÀÛ ---"
     
-    ' ì—¬ê¸°ì— Slide 3 ì—…ë°ì´íŠ¸ ì½”ë“œ ì¶”ê°€
-    ' ì˜ˆì‹œ:
+    ' ¿©±â¿¡ Slide 3 ¾÷µ¥ÀÌÆ® ÄÚµå Ãß°¡
+    ' ¿¹½Ã:
     ' Set shp = pptSlide.Shapes("Slide_3_Text_01")
     ' If Not shp Is Nothing Then
     '     ws.Range("A50").Copy
@@ -224,5 +231,5 @@ Sub Update_Slide3(pptPres As Object, ws As Worksheet)
     ' End If
     ' Application.CutCopyMode = False
     
-    Debug.Print "--- Slide 3 ì—…ë°ì´íŠ¸ ì™„ë£Œ ---"
+    Debug.Print "--- Slide 3 ¾÷µ¥ÀÌÆ® ¿Ï·á ---"
 End Sub
