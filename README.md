@@ -22,7 +22,7 @@ Excel 데이터를 PowerPoint 슬라이드에 자동으로 복사-붙여넣기�
 ## 🚀 빠른 시작
 
 ### 1. 파일 준비
-- Excel 파일에 `Copy_to_Slide` 시트 생성
+- Excel 파일에 데이터 준비
 - PowerPoint 파일 준비
 - PPT 객체에 이름 지정 (예: `Slide_1_Text_01`)
 
@@ -44,7 +44,7 @@ pptPath = "여기에_실제_파일_경로_입력.pptx"
 
 ## 📋 사용 예시
 
-### Excel 데이터 구조 (Copy_to_Slide 시트)
+### Excel 데이터 구조 (예: sheet name : Copy_to_Slide )
 ```
 A5: 2025 12월 누적 매출 Trend
 
@@ -114,14 +114,14 @@ End Sub
 3. 객체 이름 변경 (예: `Slide_1_Text_01`)
 
 ### Excel 시트 이름
-- 반드시 `Copy_to_Slide`로 지정
-- 또는 코드에서 시트 이름 수정
+
+- 또는 엑셀 파일 sheet와 코드내 sheet 일치 하는 지 확인
 
 ### 파일 경로
 - 절대 경로 사용 (예: `C:\Users\...\file.pptx`)
 - 한글 경로 가능하지만 영문 경로 권장
 
-## 🛠️ 트러블슈팅
+## 🛠️ Error Case
 
 ### "Copy_to_Slide 시트를 찾을 수 없습니다"
 → Excel에 `Copy_to_Slide` 시트가 있는지 확인
