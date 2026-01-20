@@ -1,4 +1,4 @@
-Attribute VB_Name = "Module1"
+Attribute VB_Name = "Module11"
 Option Explicit
 
 '==============================
@@ -25,7 +25,6 @@ Sub Update_All_Slides()
     End If
     
     ' ========== PPT 파일 경로 설정 ==========
-    
     pptPath = "C:\Users\YourName\Documents\sample.pptx"
     
     If Dir(pptPath) = "" Then
@@ -34,21 +33,15 @@ Sub Update_All_Slides()
     End If
     
     ' ========== PowerPoint 실행 및 파일 열기 ==========
-    
     Set pptApp = CreateObject("PowerPoint.Application")
     pptApp.Visible = True
     Set pptPres = pptApp.Presentations.Open(pptPath)
     
     Debug.Print "========== 전체 슬라이드 업데이트 시작 =========="
     
-    
-    
     ' ========== 각 슬라이드 업데이트 (함수 분리) ==========
-    
-    
     Call Update_Slide1(pptPres, ws)  ' Slide 1 처리
     Call Update_Slide2(pptPres, ws)  ' Slide 2 처리
-    
     ' 추가 슬라이드가 있으면 여기에 추가
     ' Call Update_Slide3(pptPres, ws)
     ' Call Update_Slide4(pptPres, ws)
