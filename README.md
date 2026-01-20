@@ -140,8 +140,7 @@ Update_All_Slides()          # 메인 함수
 │   └── Table 업데이트
 ├── Update_Slide2()          # Slide 2 처리
 ├── Update_Slide3()          # Slide 3 처리 (템플릿)
-├── 저장
-└── 리소스 정리
+
 ```
 
 
