@@ -125,10 +125,10 @@ A24:G25: 표 데이터 (2행 6열)
 
 **직접 만든 매핑 테이블을 참고하세요:**
 
-| PPT Object | Slide | Excel Range | Type |
+| PPT Object | Slide | Excel Range | Sheet |
 |------------|-------|-------------|------|
-| Slide_1_Text_01 | 1 | A5 | Text |
-| Slide_1_Pie_01 | 1 | A9:B12 | Chart |
+| Slide_1_Text_01 | 1 | A5 | Copy_to_Slide |
+| Slide_1_Pie_01 | 1 | A9:B12 | Copy_to_Slide |
 | ... | ... | ... | ... |
 
 ## 🔍 테스트 실행
